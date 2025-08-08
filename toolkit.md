@@ -212,3 +212,10 @@ The test ran successfully
   ```bash
   go fmt
   ```
+
+### 3. `go: cannot find main module, but found....`
+Even if the project was bult and ran without a module go tools like go test go get expects a project to be a module as when you run go test go is looking for go.mod under the hood so make the project a module by runing 
+**Fix:**
+ ```bash
+ go mod init <module-name>
+ ```
