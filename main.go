@@ -38,14 +38,14 @@ func main() {
 	shuffledIndexes = rand.Perm(len(coolFacts))
 	currentIndex = 0
 
-	http.HandleFunc("/", randomJokeHandler)
+	http.HandleFunc("/", randomFactHandler)
 	http.HandleFunc("/all", allFactsHandler)
 
 	println("Server running on http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
 
-func randomJokeHandler(w http.ResponseWriter, r *http.Request) {
+func randomFactHandler(w http.ResponseWriter, r *http.Request) {
 	// No repeat until all facts have been shown
 	if currentIndex >= len(shuffledIndexes) {
 		// Reshuffle for a new round
@@ -65,7 +65,6 @@ func randomJokeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("X-Unique-Facts-Served", fmt.Sprintf("%d", servedCount))
 	json.NewEncoder(w).Encode(fact)
 }
 
