@@ -12,7 +12,7 @@ While i also love my stack my main issue is always generics hell  expecially whe
 Go’s strong type system, built-in concurrency, simplicity, and performance and its popularity in miscroservice architecture just made it appealing.
 
 **End Goal:**
-Use Go’s built-in HTTP capabilities to create a simple REST API showing random facts. The facts will be defined in the project.
+Use Go’s built-in HTTP capabilities to create a simple REST API showing random facts. The facts will be defined in the project. No repeats until all facts used up.
 
 ---
 
@@ -93,38 +93,24 @@ go version go1.24.6 linux/amd64
 
 ## 5. Compile & Run the Project
 
-**To build the project:**
-
-If your main file is named `main.go` (recommended):
-
-```bash
-go build -o random-facts-api main.go
-```
-
-This will create an executable named `random-facts-api` in your current directory.
-
-**To run the server directly (without building):**
+**Run the server directly (without building):**
 
 ```bash
 go run main.go
 ```
 
-**To run the built executable:**
+**Build the server:**
 
+```bash
+go build -o random-facts-api main.go
+```
+On successful build, you’ll see a new file named random-facts-api created in your current directory.
+
+**Run the built executable**
 ```bash
 ./random-facts-api
 ```
+The server starts at port 8080
 
-The server will start and listen on http://localhost:8080
-
----
-
-ai prompt journal
-
-Prompt   curiculumn      Bried respinse        Helpfulnes 
-
-1. I want to install Go latest stable release on LInux uBUNTU V20
-   CURICULUM  
-   Gave me exact prompts to install go version 
-   vERY HELPFIL
-2. tELL ME BASIC O SYNTAX
+To see a random fact http://localhost:8080
+To see all random facts  http://localhost:8080/all
