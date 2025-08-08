@@ -107,7 +107,7 @@ go run main.go
 It will print Welcome to Go on terminal
 
 
-## AI Prompt Journal
+## 6. AI Prompt Journal
 
 ### 🔹 Prompt 1  
 **Prompt Used:**  
