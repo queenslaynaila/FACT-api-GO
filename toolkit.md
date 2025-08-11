@@ -235,3 +235,4 @@ Even if the project was bult and ran without a module go tools like go test go g
 | **Handler Signature** | `func handler(w http.ResponseWriter, r *http.Request)` | `(req: Request, res: Response) => { ... }` |
 | **Entry Point**    | Must have `package main` and `func main()`, which the Go runtime calls automatically | No `main()` — Node.js executes the entry file (e.g., `index.js`) from top to bottom |
 | **Hot Reloading**     | Needs tools like `air` or `reflex`. | Common with `nodemon` or `ts-node-dev`. |
+| **Testing** | Built in `go test` auto discoveres `_test.go` files for testing and runs the testing func starting with `Test` | No built in testing must use a test framework eg `jest` `mocha`. The framework willl either disover the test files based on its file naming patters or config but most times you must explicetly point the file paths to it |

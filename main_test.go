@@ -1,45 +1,76 @@
 package main
 
 import (
-	   "encoding/json"
-	   "math/rand"
-	   "net/http/httptest"
-	   "testing"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
-func TestNoImmediateRepetition(t *testing.T) {
-	// Reset the shuffle state to simulate fresh server state
-	servedFacts = make(map[int]bool)
-	servedCount = 0
-	shuffledIndexes = []int{}
-	currentIndex = 0
-
-	// Seed a new shuffle
-	shuffledIndexes = shuffledIndexes[:0]
-	shuffledIndexes = rand.Perm(len(coolFacts))
-	currentIndex = 0
+func TestHandleRandomFactRequest_NoRepeatUntilExhausted(t *testing.T) {
+	// Reset factManager so tests are predictable
+	factManager = createFactManager()
 
 	seen := make(map[string]bool)
 
-	// Hit the endpoint as many times as there are facts
-	for i := 0; i < len(coolFacts); i++ {
-		req := httptest.NewRequest("GET", "/", nil)
-		w := httptest.NewRecorder()
+	// Call handler once for each fact
+	for i := 0; i < len(factsDatabase); i++ {
+		req := httptest.NewRequest(http.MethodGet, "/", nil)
+		rec := httptest.NewRecorder()
 
-		randomFactHandler(w, req)
+		handleRandomFactRequest(rec, req)
 
-		resp := w.Result()
-		defer resp.Body.Close()
-
-		var result Fact
-		err := json.NewDecoder(resp.Body).Decode(&result)
-		if err != nil {
-			t.Fatalf("Failed to decode response: %v", err)
+		if rec.Code != http.StatusOK {
+			t.Fatalf("expected 200 OK, got %d", rec.Code)
 		}
 
-		if seen[result.Fact] {
-			t.Errorf("Duplicate fact detected before all facts were served: %s", result.Fact)
+		var resp FactResponse
+		if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
+			t.Fatalf("failed to parse JSON: %v", err)
 		}
-		seen[result.Fact] = true
+
+		// Check if we got a repeat before exhausting
+		if seen[resp.Fact] {
+			t.Fatalf("fact repeated before all facts were shown: %q", resp.Fact)
+		}
+		seen[resp.Fact] = true
+	}
+}
+
+func TestHandleRandomFactRequest_ReshufflesAfterExhaustion(t *testing.T) {
+	factManager = createFactManager()
+
+	for i := 0; i < len(factsDatabase); i++ {
+		req := httptest.NewRequest(http.MethodGet, "/", nil)
+		rec := httptest.NewRecorder()
+		handleRandomFactRequest(rec, req)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	rec := httptest.NewRecorder()
+	handleRandomFactRequest(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200 OK after exhaustion, got %d", rec.Code)
+	}
+}
+
+func TestHandleAllFactsRequest_ReturnsFullList(t *testing.T) {
+	req := httptest.NewRequest(http.MethodGet, "/all", nil)
+	rec := httptest.NewRecorder()
+
+	handleAllFactsRequest(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("expected 200 OK, got %d", rec.Code)
+	}
+
+	var allFacts []string
+	if err := json.Unmarshal(rec.Body.Bytes(), &allFacts); err != nil {
+		t.Fatalf("failed to parse JSON: %v", err)
+	}
+
+	if len(allFacts) != len(factsDatabase) {
+		t.Fatalf("expected %d facts, got %d", len(factsDatabase), len(allFacts))
 	}
 }
