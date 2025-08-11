@@ -220,16 +220,17 @@ Even if the project was bult and ran without a module go tools like go test go g
  go mod init <module-name>
  ```
 
- ## Technology Comparison GO vs Express
+## Technology Comparison GO vs Express
 
 | Feature            | Go (net/http)                                 | Express (Node.js)                        |
 |--------------------|-----------------------------------------------|------------------------------------------|
-| **Routing**        | `http.HandleFunc("/", handler)`              | `app.get("/", handler)`                  |
+| **Routing**        | `http.HandleFunc("/", handler)`               | `app.get("/", handler)`                  |
 | **Middleware**     | Manual chaining, explicit                     | Built-in, easy chaining                  |
-| **Ecosystem**      | Smaller, focused, strong stdlib               | Huge, npm registry, many packages        |
+| **Ecosystem**      | Smaller, focused, Go standard library stdlib already has a lot of what we need  so we dont always need extra packaging and so theres less reliance on 3rd parties, package ecosystem exists but its more focused and doesnt have small libraries and their duplicates like npm,             | Huge, npm registry, many packages for almost anything but this also means most pkgs are overlaping. In general theres overrelianace on many 3rd party pkgs        |
 | **Error Handling** | Explicit and local to each handler. If a handler does not handle an error, it is ignored—no global error handler by default. | Global error-handling middleware can catch errors not handled in a route. |
 | **Deployment**     | Single binary, easy to deploy                 | Needs Node.js runtime                    |
-| **Function AND VAR Syntax**| `func` defines the function. Type comes after name: `var name string = "Queenslay"` | `function` defines the function. Type comes after colon: `let name: string = "Queenslay"` |
-| **Type Declaration**  | Struct tags: `type FactResponse struct {  }` | Interfaces: `interface FactResponse { }` |
-| **Arrays**         | `[]type` — e.g., `[]string{"a","b"}`        | `type[]` or `Array<type>` — e.g., `["a","b"]` |
+| **Function & Var Syntax** | `func` defines the function. Type comes after name: `var name string = "Queenslay"` | `function` defines the function. Type comes after colon: `let name: string = "Queenslay"` |
+| **Type Declaration** | Struct tags: `type FactResponse struct { }` | Interfaces: `interface FactResponse { }` |
+| **Arrays**         | `[]type` — e.g., `[]string{"a","b"}`           | `type[]` or `Array<type>` — e.g., `["a","b"]` |
 | **Handler Signature** | `func handler(w http.ResponseWriter, r *http.Request)` | `(req: Request, res: Response) => { ... }` |
+| **Entry Point**    | Must have `package main` and `func main()`, which the Go runtime calls automatically | No `main()` — Node.js executes the entry file (e.g., `index.js`) from top to bottom |
