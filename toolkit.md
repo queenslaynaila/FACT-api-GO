@@ -144,7 +144,7 @@ Code was explained line by line.
 
 ### 🔹 Prompt 3  
 **Prompt Used:**  
-> I want to refactor the code so that no fact is repeated until all the facts in our facts array have been exhausted. How would I achieve that in Go? I think this project is doing too little — do you have any extra feature changes we can add to give it some depth?  
+> I want to refactor the code so that no fact is repeated until all the facts in our facts array have been exhausted. How would I achieve that in Go?  
 
 **Link to Curriculum:**  Using AI to Refactor
 
@@ -159,30 +159,29 @@ Code was explained line by line.
 
 ### 🔹 Prompt 4  
 **Prompt Used:**  
-Now that we want to add new features, before I get started: Does Go have an inbuilt linting tool like ESLint to help me catch syntax errors while doing so?  
+I want to make this code more readable and maintable [code] Please help by idnetifying difficylt parts, pointing out better var names, identify complex sections to break down and point out any incosistent stype eg naming formating issues? Do you have any linting recomendations for go? 
 
-**Link to Curriculum:**  *Using AI to Refactor*
+**Link to Curriculum:** [Using AI to Refactor – Code Readability Improvement](https://ai.moringaschool.com/ai-software/ai-use-cases/usecases-refactor/)
 
-**AI’s Response Summary:**  
+**AI’s Response Summary:** 
+Pointed out better variable names, and suggested breaking down some parts
 Outlined various Go linters and how to use them.  
 I chose `gofmt`, the top recommended one.  
 Also recommended using the Go VS Code extension to aid with formatting and linting.  
 
-**Helpfulness:** 5/5  
-The linter worked and helped me catch a couple of syntax errors I had.
-
+**Helpfulness:** 3/5  
+**Feedback:** **I found the recommended refactored code to have too much abstraction. I ended up using only about half of the abstraction suggested, but the naming was on point.**
 ---
 
 ### 🔹 Prompt 5  
-**Prompt Used:**  I want to test no repetition behaviour until fact list is exhausted this project, Can you  guide me throigh it? 
+**Prompt Used:**  Im learning how to test in Go and i want to understand what behaviours to test., Help me make a testing plan by asking me questions about the codes behavioir , For each behaviour ask me how i would test it and give me hints if i miss sth ? 
 
-**Link to Curriculum:** Using AI for Testing and Iteration*
+**Link to Curriculum:** [Using AI for Testing – What to Test](https://ai.moringaschool.com/ai-software/ai-use-cases/usecases-testing-simpler/)
 
 **AI’s Response Summary:**  
-The AI provided a step-by-step guide to create a `main_test.go` file using Go's built-in `testing` package.  
-It explained how the test works and how to run it using `go test`.  
+The AI asked me questions about the general code behaviour eg whats the function to do, and what happens after a user has requested all facts, how does the function decide which facs to present. After i replied it sent me behaviours ive missed and gave me tests suggestions, it also had a basic guide to testing in go, how the test works and how to run it using `go test`.  
 **Helpfulness:** 5/5  
-The test ran successfully
+
 
 ## 7. Common Errors
 
