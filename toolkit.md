@@ -170,7 +170,8 @@ I chose `gofmt`, the top recommended one.
 Also recommended using the Go VS Code extension to aid with formatting and linting.  
 
 **Helpfulness:** 3/5  
-**Feedback:** **I found the recommended refactored code to have too much abstraction. I ended up using only about half of the abstraction suggested, but the naming was on point.**
+**Feedback:** I found the recommended refactored code to have too much abstraction. I ended up using only about half of the abstraction suggested, but the naming was on point.
+
 ---
 
 ### 🔹 Prompt 5  
@@ -230,8 +231,10 @@ Even if the project was bult and ran without a module go tools like go test go g
 | **Deployment**     | Code is compiled to a Single binary, that runs directly with no runtime needed                | Needs Node.js runtime                    |
 | **Function & Var Syntax** | `func` defines the function. Type comes after name: `var name string = "Queenslay"` | `function` defines the function. Type comes after colon: `let name: string = "Queenslay"` |
 | **Type Declaration** | Struct tags: `type FactResponse struct { }` | Interfaces: `interface FactResponse { }` |
-| **Arrays**         | `[]type` — e.g., `[]string{"a","b"}`           | `type[]` or `Array<type>` — e.g., `["a","b"]` |
+| **Arrays**         | `[]type` — e.g., `var factsDatabase = []string{"...",}`           | `type[]` or `Array<type>` — e.g., `const factsDatabase: string[] = []` |
 | **Handler Signature** | `func handler(w http.ResponseWriter, r *http.Request)` | `(req: Request, res: Response) => { ... }` |
 | **Entry Point**    | Must have `package main` and `func main()`, which the Go runtime calls automatically | No `main()` — Node.js executes the entry file (e.g., `index.js`) from top to bottom |
 | **Hot Reloading**     | Needs tools like `air` or `reflex`. | Common with `nodemon` or `ts-node-dev`. |
 | **Testing** | Built in `go test` auto discoveres `_test.go` files for testing and runs the testing func starting with `Test` | No built in testing must use a test framework eg `jest` `mocha`. The framework willl either disover the test files based on its file naming patters or config but most times you must explicetly point the file paths to it |
+| **Arrays** | `[]type` — e.g., `var factsDatabase = []string{"...",}` | `type[]` or `Array<type>` — e.g., `const factsDatabase: string[] = []` |
+| **App Creation** | No `app` instance — register handlers directly with `http.HandleFunc`. | Must create an app instance: `const app = express();` before adding routes. |
