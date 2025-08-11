@@ -32,8 +32,6 @@ type FactManager struct {
 	totalFacts      int
 }
 
-var factManager = createFactManager()
-
 func shuffleFactOrder(manager *FactManager) {
 	manager.shuffledIndices = rand.Perm(manager.totalFacts)
 	manager.currentIndex = 0
@@ -48,6 +46,9 @@ func createFactManager() FactManager {
 	shuffleFactOrder(&manager)
 	return manager
 }
+
+
+var factManager = createFactManager()
 
 func handleRandomFactRequest(w http.ResponseWriter, r *http.Request) {
 	// If we've gone through all facts, shuffle again
