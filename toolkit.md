@@ -219,3 +219,17 @@ Even if the project was bult and ran without a module go tools like go test go g
  ```bash
  go mod init <module-name>
  ```
+
+ ## Technology Comparison GO vs Express
+
+| Feature            | Go (net/http)                                 | Express (Node.js)                        |
+|--------------------|-----------------------------------------------|------------------------------------------|
+| **Routing**        | `http.HandleFunc("/", handler)`              | `app.get("/", handler)`                  |
+| **Middleware**     | Manual chaining, explicit                     | Built-in, easy chaining                  |
+| **Ecosystem**      | Smaller, focused, strong stdlib               | Huge, npm registry, many packages        |
+| **Error Handling** | Explicit and local to each handler. If a handler does not handle an error, it is ignored—no global error handler by default. | Global error-handling middleware can catch errors not handled in a route. |
+| **Deployment**     | Single binary, easy to deploy                 | Needs Node.js runtime                    |
+| **Function AND VAR Syntax**| `func` defines the function. Type comes after name: `var name string = "Queenslay"` | `function` defines the function. Type comes after colon: `let name: string = "Queenslay"` |
+| **Type Declaration**  | Struct tags: `type FactResponse struct {  }` | Interfaces: `interface FactResponse { }` |
+| **Arrays**         | `[]type` — e.g., `[]string{"a","b"}`        | `type[]` or `Array<type>` — e.g., `["a","b"]` |
+| **Handler Signature** | `func handler(w http.ResponseWriter, r *http.Request)` | `(req: Request, res: Response) => { ... }` |
